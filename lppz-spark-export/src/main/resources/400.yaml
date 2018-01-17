@@ -1,0 +1,18 @@
+!!com.lppz.spark.sap.bean.Hive2DbmsBean {
+  hdfsUrl: 'hdfs://hamaster:9000',
+  hiveUrl: '/user/hive/warehouse/utags.db/zpwhy004',
+  hiveSchema: utags,
+  hiveTableName: zpwhy004,
+  hiveSql: 'select * from "SAPABAP1"."/BIC/OHZPWHY004"',
+  rdbmsdbDriver: com.sap.db.jdbc.Driver,
+  rdbmsJdbcUrl: 'jdbc:sap://10.8.103.240:30015/SAPABAP1',
+  rdbmsJdbcUser: HDBMODEL,
+  rdbmsJdbcPasswd: Modleprdbw_1806,
+  rdbmsSchemaName: SAPABAP1,
+  rdbmsTableName: "/BIC/OHZPWHY004",
+  useSql: true,
+  primaryKey: record,
+  totalOnce: 50000,
+  partition: 100,
+  partitionColumn: calday
+}

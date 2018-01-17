@@ -1,0 +1,4 @@
+!!com.lppz.spark.scala.bean.SparkExportBean
+ sqlBean: {schema: omsext, sql: "select  *  from omsextordersharding
+        where id>#start# and id<=#end# ",
+      esIndex: omsext, esType: ordersharding, total4Once: 200, partionNum: 5, dateColumnNames: createtime}

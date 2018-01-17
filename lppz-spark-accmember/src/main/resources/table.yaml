@@ -1,0 +1,88 @@
+!!com.lppz.spark.accmember.bean.AccExportBean
+hdfsUrl: hdfs://hamaster:9000
+partition: 250
+sourceDriver: com.mysql.jdbc.Driver
+sourceJdbcUrl: jdbc:mysql://10.8.202.231:3311/acc_export?useConfigs=maxPerformance&characterEncoding=utf8
+sourcePwd: lppzacc
+sourceUser: root
+tables:
+  '7':
+    batchSize: 300
+    joinKey: null
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_member_voucher: 'id,cpntptid,cpntptname,precouponid,directedflag,minorderamt,cpnlevel,#storeall,ptoduceall,amt,discount,validdate,invaliddate,pmtorderid,lineid,usedorderid,usedtime,#validflag,pword,creator,createddate,crmmodifiedts,saleamt,#limitflag,membernopos,member_no,content,notes'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_member_voucher_view
+    targetColumns: ['id,cpntptid,cpntptname,precouponid,directedflag,minorderamt,cpnlevel,storeall,ptoduceall,amt,discount,validdate,invaliddate,pmtorderid,lineid,usedorderid,usedtime,validflag,pword,creator,createddate,crmmodifiedts,saleamt,limitflag,membernopos,member_no,content,notes']
+    targetTableName: [lp_member_voucher]
+  '6':
+    batchSize: 300
+    joinKey: null
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_member_change_details: 'id,member_no,partner_no,change_type,#membertypecd,points,pk_crm,outorder_code,order_code,line_id,txn_reason,remark,create_time'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_member_change_details_view
+    targetColumns: ['id,member_no,partner_no,change_type,member_type,points,pk_crm,outorder_code,order_code,line_id,txn_reason,remark,create_time']
+    targetTableName: [lp_member_change_details]
+  '5':
+    batchSize: 300
+    joinKey: null
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_marketgrouprelamembers: 'id,lpgroupid,lpmemberno'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_marketgrouprelamembers_view
+    targetColumns: ['id,lpgroupid,lpmemberno']
+    targetTableName: [lp_marketgrouprelamembers]
+  '4':
+    batchSize: 300
+    joinKey: null
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_member_rela_accounts: 'id,member_no,partner_no,chanel_code,outer_user_id,outer_unionid,create_time,delete_flag,outIdType'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_member_rela_accounts_view
+    targetColumns: ['id,member_no,partner_no,chanel_code,outer_user_id,outer_unionid,create_time,delete_flag,outIdType']
+    targetTableName: [lp_member_rela_accounts]
+  '3':
+    batchSize: 300
+    joinKey:
+      lp_member_capital_account: [level_type]
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_member_capital_account: 'id,partner_no,member_no,card_no,#level_type,$8796107767899,credit_scores,behavior_scores,$8796107833435,card_balance,donation_amount,card_status'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_member_capital_account_view
+    targetColumns: ['id,partner_no,member_no,card_no,level_type,all_scores,credit_scores,behavior_scores,all_card_balance,card_balance,donation_amount,card_status']
+    targetTableName: [lp_member_capital_account]
+    redisKey: id
+  '2':
+    batchSize: 300
+    joinKey:
+      lp_member_address: [p_gender]
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_member_address: 'id,member_no,partner_no,consignee,#p_gender,position,longitude,dimensionality,map_type,address,cell_phone,province_code,province_name,city_code,city_name,district_code,district_name,create_time,edit_time,is_default,post_code'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_member_address_view
+    targetColumns: ['id,member_no,partner_no,consignee,gender,position,longitude,dimensionality,map_type,address,cell_phone,province_code,province_name,city_code,city_name,district_code,district_name,create_time,edit_time,is_default,post_code']
+    targetTableName: [lp_member_address]
+  '1':
+    batchSize: 300
+    joinKey:
+      lp_member: [membercd, leveltype, sourcetype]
+      lp_member_extend: [lpgendercd, lpeducationcd, lpjobcd, lpmarragecd, lpincomecd,
+        lpidentitycd]
+    partition: 200
+    primaryKey: _id
+    selectColumn: {lp_member: 'partner_no,card_no,member_no,telephone,#sourcetype,member_account,member_pwd,password_encoding,birthday,create_time,create_user,edit_time,edit_user,register_store,recommender,member_status,sync_crm_status,sync_crm_time,#membercd,#leveltype,email',
+      lp_member_extend: 'id,member_no,partner_no,member_name,member_nickname,#lpgendercd,#lpeducationcd,#lpjobcd,#lpmarragecd,#lpincomecd,#lpidentitycd,id_number,header_imgpath,create_time,delete_flag,register_ip,register_terminal,terminal_type'}
+    seqTable: lp_member_seq
+    sourceTableOrView: lp_member_view
+    targetColumns: ['partner_no,card_no,member_no,telphone,source_type,member_account,member_pwd,password_encoding,birthday,create_time,create_user,edit_time,edit_user,register_store,recommender,member_status,sync_crm_status,sync_crm_time,member_type,member_level,email',
+      'id,member_no,partner_no,member_name,member_nickname,gender,educationcd,occupation,marital_status,income,id_type,id_number,header_imgpath,create_time,delete_flag,register_ip,register_terminal,terminal_type']
+    targetTableName: [lp_member, lp_member_extend]
+totalOnce: 5000000
+

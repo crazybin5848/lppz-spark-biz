@@ -1,0 +1,4 @@
+!!com.lppz.spark.scala.bean.HiveBean {
+  hiveSchema: omsext,
+  hiveTableName: omsextordersharding
+}

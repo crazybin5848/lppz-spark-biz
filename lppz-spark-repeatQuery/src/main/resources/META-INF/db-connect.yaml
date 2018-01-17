@@ -1,0 +1,3 @@
+configBean: {rdbmsdbDriver: com.mysql.jdbc.Driver, rdbmsjdbcPasswd: oms_109,
+  rdbmsjdbcUrl: 'jdbc:mysql://10.16.3.109:3306/#schema#?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull',
+  rdbmsjdbcUser: oms_109, schema: omsext}

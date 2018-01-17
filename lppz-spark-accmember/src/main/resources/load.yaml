@@ -1,0 +1,63 @@
+!!com.lppz.spark.accmember.bean.LoadSqlBean
+jdbcDriver: com.mysql.jdbc.Driver
+myCatInfo:
+  '211': {targetJdbcUrl: 'jdbc:mysql://10.8.202.211:7066/MEMBERDB?useConfigs=maxPerformance&characterEncoding=utf8',
+    targetPwd: root, targetUser: root}
+  '212': {targetJdbcUrl: 'jdbc:mysql://10.8.202.212:7066/MEMBERDB?useConfigs=maxPerformance&characterEncoding=utf8',
+    targetPwd: root, targetUser: root}
+  '204': {targetJdbcUrl: 'jdbc:mysql://10.8.202.204:7066/MEMBERDB?useConfigs=maxPerformance&characterEncoding=utf8',
+    targetPwd: root, targetUser: root}
+  '205': {targetJdbcUrl: 'jdbc:mysql://10.8.202.205:7066/MEMBERDB?useConfigs=maxPerformance&characterEncoding=utf8',
+    targetPwd: root, targetUser: root}
+tables:
+  lp_member_rela_accounts:
+    batchSize: null
+    joinKey: null
+    partition: null
+    primaryKey: null
+    selectColumn: null
+    seqTable: null
+    sourceTableOrView: lp_member_rela_accounts
+    targetColumns: ['id,member_no,partner_no,chanel_code,outer_user_id,outer_unionid,create_time,delete_flag']
+    targetTableName: null
+  lp_member_address:
+    batchSize: null
+    joinKey: null
+    partition: null
+    primaryKey: null
+    selectColumn: null
+    seqTable: null
+    sourceTableOrView: lp_member_address
+    targetColumns: ['id,member_no,partner_no,consignee,gender,position,longitude,dimensionality,map_type,address,cell_phone,province_code,province_name,city_code,city_name,district_code,district_name,create_time,edit_time,is_default,post_code']
+    targetTableName: null
+  lp_member_capital_account:
+    batchSize: null
+    joinKey: null
+    partition: null
+    primaryKey: null
+    selectColumn: null
+    seqTable: null
+    sourceTableOrView: lp_member_capital_account
+    targetColumns: ['id,partner_no,member_no,card_no,level_type,all_scores,credit_scores,behavior_scores,all_card_balance,card_balance,donation_amount,card_status']
+    targetTableName: null
+  lp_member:
+    batchSize: null
+    joinKey: null
+    partition: null
+    primaryKey: null
+    selectColumn: null
+    seqTable: null
+    sourceTableOrView: lp_member
+    targetColumns: ['partner_no,card_no,member_no,telphone,source_type,member_account,member_pwd,password_encoding,birthday,create_time,create_user,edit_time,edit_user,register_store,recommender,member_status,sync_crm_status,sync_crm_time,member_type,member_level']
+    targetTableName: null
+  lp_member_extend:
+    batchSize: null
+    joinKey: null
+    partition: null
+    primaryKey: null
+    selectColumn: null
+    seqTable: null
+    sourceTableOrView: lp_member_extend
+    targetColumns: ['id,member_no,partner_no,member_name,member_nickname,gender,educationcd,occupation,marital_status,income,id_type,id_number,header_imgpath,create_time,delete_flag,register_ip,register_terminal,terminal_type,email']
+    targetTableName: null
+

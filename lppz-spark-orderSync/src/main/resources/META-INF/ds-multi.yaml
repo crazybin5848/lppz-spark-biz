@@ -1,0 +1,11 @@
+!!com.lppz.core.datasource.MycatClusterDynamicDataSource {
+dsBean: !!com.lppz.core.datasource.LppzMycatDataSource {
+ protocol: 'mysql',
+ schemaName: 'OMSDB',
+ userName: 'root',
+ passwd: 'root'
+},
+zkServerAddr: "192.168.37.243:2181,192.168.37.245:2181,192.168.37.246:2181",
+zkMycatClusterName: "mycat-cluster-oms",
+nodePrefix: "mycat_fz_",
+}

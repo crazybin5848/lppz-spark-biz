@@ -1,0 +1,29 @@
+!!com.lppz.hbase.bean.Spark2HbaseBean
+sparkBeanMap:
+  orderline:
+    sqlBean: {colList: id, familyName: orderline, isLeaf: false, isRootHbase: false,
+      mainId: id, numPartitions: 36, offset: null, parsent: order, relateKey: myorder,
+      schema: omsext, sql: select * from omsextorderlines, tableName: omsextorderlines,
+      total4Once: 100000}
+    targetBean: {cf: orderline, hbasePort: '2181', hbaseQuorum: 192.168.37.243, partionNum: '36.0',
+      poolSize: '50.0', tablebname: omsorder}
+  paymentinfo:
+    sqlBean: {colList: id, familyName: paymentinfo, isLeaf: true, isRootHbase: false,
+      mainId: id, numPartitions: 36, offset: null, parsent: order, relateKey: myorder,
+      schema: omsext, sql: select * from omsextpaymentinfo, tableName: omsextpaymentinfo,
+      total4Once: 100000}
+    targetBean: {cf: paymentinfo, hbasePort: '2181', hbaseQuorum: 192.168.37.243,
+      partionNum: '36.0', poolSize: '50.0', tablebname: omsorder}
+  shipment:
+    sparkBeanMap: {}
+    sqlBean: {colList: id, familyName: shipment, isLeaf: true, isRootHbase: false,
+      mainId: id, numPartitions: 36, offset: null, parsent: order, relateKey: orderfk,
+      schema: omsext, sql: select * from omsextshipments, tableName: omsextshipments,
+      total4Once: 100000}
+    targetBean: {cf: shipment, hbasePort: '2181', hbaseQuorum: 192.168.37.243, partionNum: '36.0',
+      poolSize: '50.0', tablebname: omsorder}
+sqlBean: {colList: 'orderid,outorderid', familyName: order, isLeaf: false, isRootHbase: true,
+  mainId: orderid, numPartitions: 36, offset: null, parsent: null, relateKey: null,
+  schema: omsext, sql: select * from omsextorders, tableName: omsextorders, total4Once: 100000}
+targetBean: {cf: order, hbasePort: '2181', hbaseQuorum: 192.168.37.243, partionNum: '36.0',
+  poolSize: '50.0', tablebname: omsorder}

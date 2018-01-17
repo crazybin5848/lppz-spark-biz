@@ -1,0 +1,14 @@
+!!com.lppz.spark.bean.jedis.JedisClusterYamlBean {
+jedisClusterPool: !!com.lppz.spark.bean.jedis.JedisClusterPool {
+ maxTotal: 100,
+ maxIdle: 100,
+ maxWaitMillis: 10000,
+ testOnBorrow: false,
+ testOnReturn: false,
+ blockWhenExhausted: false,
+ numTestsPerEvictionRun: 100
+},
+jedisClusterNode: [{host: "10.8.102.168",port: 7000},{host: "10.8.102.169",port: 7000},{host: "10.8.102.170",port: 7000}],
+timeout: 50000,
+maxRedirections: 5
+}

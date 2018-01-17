@@ -1,0 +1,72 @@
+!!com.lppz.spark.mysql.bean.Db2DbBean
+partition: 10
+sourceDriver: com.mysql.jdbc.Driver
+sourceJdbcUrl: jdbc:mysql://10.8.202.215:3311/acc?useConfigs=maxPerformance&characterEncoding=utf8
+sourcePwd: lppzacc
+sourceUser: root
+tables:
+- {batchSize: 100, endTag: '2015-08-01', parentKey: null, partition: 500, primaryKey: member_no,
+  sourceSql: 'SELECT a.p_lppartnerno as partner_no, a.p_lpcardno as card_no, b.p_memberno
+    as member_no, a.p_lpmobileno as telephone, e.`Code` AS source_type, a.p_uid as
+    member_account, a.passwd as member_pwd, a.p_passwordencoding as password_encoding,
+    a.p_lpbirthday as birthday, a.createdTS as create_time, a.p_lpcreator as create_user,
+    a.modifiedTS as edit_time, ''admin'' as edit_user, a.p_lpregisterstore as register_store,
+    a.p_lprecomder as recommender, a.p_lpmemberstatus as member_status, a.p_synccrmstatus
+    as sync_crm_status, a.p_synccrmtime as sync_crm_time, c.`Code` AS member_type,
+    d.`Code` AS member_level FROM lpmembers b INNER JOIN users a ON b.p_customer =a.PK
+    LEFT JOIN enumerationvalues c ON c.PK = b.p_membercd LEFT JOIN enumerationvalues
+    d ON d.PK = b.p_leveltype LEFT JOIN enumerationvalues e ON e.PK = b.p_sourcetype
+    where a.createdts >=? and a.createdts<?', startTag: '2015-05-01', subBeans: null,
+  targetColumns: 'partner_no,card_no,member_no,telphone,source_type,member_account,member_pwd,password_encoding,birthday,create_time,create_user,edit_time,edit_user,register_store,recommender,member_status,sync_crm_status,sync_crm_time,member_type,member_level',
+  targetSql: null, targetTableName: lp_member, totalOnce: null}
+- {batchSize: 100, endTag: '2015-08-01', parentKey: c.p_memberno, partition: 500,
+  primaryKey: null, sourceSql: 'SELECT a.PK as id, c.p_memberno as member_no, b.p_lppartnerno
+    as partner_no, a.p_lastname as consignee, d.`Code` AS gender, NULL AS position,
+    a.p_appartment as longitude, a.p_building as dimensionality, ''2'' AS map_type,
+    a.p_streetname as address, a.p_cellphone as cell_phone, a.p_lpprovincecd as province_code,
+    a.p_lpprovincename as province_name, a.p_lpcitycd as city_code, a.p_lpcityname
+    as city_name, a.p_lpdistrictcd as district_code, a.p_lpdistrictname as district_name,
+    a.createdTS as create_time, a.modifiedTS as edit_time, ''0'' AS is_default, p_postalcode
+    as post_code FROM addresses a INNER JOIN users b ON b.PK=a.OwnerPkString INNER
+    JOIN lpmembers c ON c.p_customer =a.OwnerPkString LEFT JOIN enumerationvalues
+    d ON d.PK =a.p_gender where b.createdts >=? and b.createdts<?', startTag: '2015-05-01',
+  subBeans: null, targetColumns: 'id,member_no,partner_no,consignee,gender,position,longitude,dimensionality,map_type,address,cell_phone,province_code,province_name,city_code,city_name,district_code,district_name,create_time,edit_time,is_default,post_code',
+  targetSql: null, targetTableName: lp_member_address, totalOnce: null}
+- {batchSize: 100, endTag: '2015-08-01', parentKey: b.p_memberno, partition: 500,
+  primaryKey: null, sourceSql: 'SELECT b.PK as id, b.p_memberno as member_no, a.p_lppartnerno
+    as partner_no, a.p_name as member_name, a.p_uid as member_nickname, c.`Code` AS
+    gender, d.`Code` AS educationcd, e.`Code` AS occupation, f.`Code` AS marital_status,
+    g.`Code` AS income, h.`Code` AS id_type, a.p_lpidno as id_number, a.p_headerimgpath
+    as header_imgpath, a.createdTS as create_time, ''0'' AS delete_flag, a.p_registerip
+    as register_ip, NULL as register_terminal, NULL AS terminal_type, p_lpemail as
+    email FROM lpmembers b INNER JOIN users a ON b.p_customer =a.PK LEFT JOIN enumerationvalues
+    c ON c.PK =a.p_lpgendercd LEFT JOIN enumerationvalues d ON d.PK =a.p_lpeducationcd
+    LEFT JOIN enumerationvalues e ON e.PK =a.p_lpjobcd LEFT JOIN enumerationvalues
+    f ON f.PK =a.p_lpmarragecd LEFT JOIN enumerationvalues g ON g.PK =a.p_lpincomecd
+    LEFT JOIN enumerationvalues h ON h.PK =a.p_lpidentitycd where a.createdts >=?
+    and a.createdts<?', startTag: '2015-05-01', subBeans: null, targetColumns: 'id,member_no,partner_no,member_name,member_nickname,gender,educationcd,occupation,marital_status,income,id_type,id_number,header_imgpath,create_time,delete_flag,register_ip,register_terminal,terminal_type,email',
+  targetSql: null, targetTableName: lp_member_extend, totalOnce: null}
+- {batchSize: 100, endTag: '2015-08-01', parentKey: b.p_memberno, partition: 500,
+  primaryKey: null, sourceSql: 'SELECT a.PK as id, c.p_lppartnerno as partner_no,
+    b.p_memberno as member_no, c.p_lpcardno as card_no, e.`Code` AS level_type, ''0''
+    AS all_scores, ''0'' AS credit_scores, ''0'' AS behavior_scores, ''0'' AS all_card_balance,
+    ''0'' AS card_balance, ''0'' AS donation_amount, IF(c.p_lpcardstatus<> ''X'',''Y'',''X'')
+    FROM lpmemberscores a INNER JOIN lpmembers b ON b.PK = a.p_lppzmembers INNER JOIN
+    users c ON c.PK =b.p_customer LEFT JOIN enumerationvalues e ON e.PK=b.p_leveltype
+    where c.createdts >=? and c.createdts<?', startTag: '2015-05-01', subBeans: null,
+  targetColumns: 'id,partner_no,member_no,card_no,level_type,all_scores,credit_scores,behavior_scores,all_card_balance,card_balance,donation_amount,card_status',
+  targetSql: null, targetTableName: lp_member_capital_account, totalOnce: null}
+- {batchSize: 100, endTag: '2015-08-01', parentKey: c.p_memberno, partition: 500,
+  primaryKey: null, sourceSql: 'SELECT a.PK as id, c.p_memberno as member_no, b.p_lppartnerno
+    as partner_no, NULL AS chanel_code, a.p_outerid as outer_user_id, d.p_unionId
+    AS outer_unionid, a.createdTS as create_time, ''0'' AS delete_flag from lprelaaccounts
+    a INNER JOIN users b ON b.PK = a.p_customer INNER JOIN lpmembers c ON c.p_customer
+    =a.p_customer INNER JOIN lpwechatopenidunionidrel d ON d.p_openId=a.p_outerid
+    where b.createdts >=? and b.createdts<?', startTag: '2015-05-01', subBeans: null,
+  targetColumns: 'id,member_no,partner_no,chanel_code,outer_user_id,outer_unionid,create_time,delete_flag',
+  targetSql: null, targetTableName: lp_member_rela_accounts, totalOnce: null}
+targetDriver: null
+targetJdbcUrl: null
+targetPwd: null
+targetUser: null
+totalOnce: 1000

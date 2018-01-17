@@ -1,0 +1,44 @@
+!!com.lppz.spark.scala.bean.Spark2HbaseBean
+jedisClusterYamlPath: /Users/zoubin/IdeaProjects/MixedScalaProj/Spark-History-Order/src/main/resources/META-INF/jedis-cluster.yaml
+month: 2015-07
+sparkBeanMap:
+  orderline:
+    jedisClusterYamlPath: /Users/zoubin/IdeaProjects/MixedScalaProj/Spark-History-Order/src/main/resources/META-INF/jedis-cluster.yaml
+    month: 2015-07
+    sparkBeanMap: {}
+    sqlBean: {colList: olid, familyName: orderline, isLeaf: true, isRootHbase: false, excludeColumnList: 'num,id',
+      mainIdColumn: olid,  parentFamilyName: order,
+      relateKey: myorder, schema: omsext, sql: 'select * from (select row_number()
+        over (order by id) num,id as olid,* from omsextorderlines where ds=''#month#'') where
+        num>=#start# and num<=#end# and ds=''#month#''', tableName: hbaseorder, total4Once: 10}
+    targetBean: {cf: orderline, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+      partionNum: 3, isWal: false, tablebname: hbaseorder}
+  paymentinfo:
+    jedisClusterYamlPath: /Users/zoubin/IdeaProjects/MixedScalaProj/Spark-History-Order/src/main/resources/META-INF/jedis-cluster.yaml
+    month: 2015-07
+    sparkBeanMap: {}
+    sqlBean: {colList: payid, familyName: paymentinfo, isLeaf: true, isRootHbase: false, excludeColumnList: 'num,id',
+      mainIdColumn: payid,  parentFamilyName: order,
+      relateKey: myorder, schema: omsext, sql: 'select * from (select row_number()
+        over (order by id) num,id as payid,* from omsextpaymentinfo where ds=''#month#'') where
+        num>=#start# and num<=#end# and ds=''#month#''', tableName: payshipinfo, total4Once: 10}
+    targetBean: {cf: paymentinfo, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+      partionNum: 3, isWal: false, tablebname: payshipinfo}
+  shipment:
+    jedisClusterYamlPath: /Users/zoubin/IdeaProjects/MixedScalaProj/Spark-History-Order/src/main/resources/META-INF/jedis-cluster.yaml
+    month: 2015-07
+    sparkBeanMap: {}
+    sqlBean: {colList: shipid, familyName: shipment, isLeaf: true, isRootHbase: false, excludeColumnList: 'num,id',
+      mainIdColumn: shipid,  parentFamilyName: order,
+      relateKey: orderfk, schema: omsext, sql: 'select * from (select row_number()
+        over (order by id) num,id as shipid,* from omsextshipments where ds=''#month#'') where
+        num>=#start# and num<=#end# and ds=''#month#''', tableName: payshipinfo, total4Once: 10}
+    targetBean: {cf: shipment, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+      partionNum: 3, isWal: false, tablebname: payshipinfo}
+sqlBean: {colList: 'orderid,id', familyName: order, isLeaf: false, isRootHbase: true, excludeColumnList: 'num',
+  mainIdColumn: orderid,  parentFamilyName: null,
+  relateKey: null, schema: omsext, sql: 'select * from (select row_number() over (order
+    by id) num,* from omsextorders where ds=''#month#'') where num>=#start# and num<=#end#
+    and ds=''#month#''', tableName: hbaseorder, total4Once: 10}
+targetBean: {cf: order, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+  partionNum: 3, isWal: false, tablebname: hbaseorder}

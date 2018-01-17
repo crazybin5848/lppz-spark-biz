@@ -1,0 +1,10 @@
+#!/bin/bash
+targetDir="target/kernel-lppz-dubbolog"
+mvn clean dependency:copy-dependencies -DoutputDirectory=$targetDir/lib -DincludeScope=compile
+mvn install -Dmaven.test.skip=true
+cp -a target/*.jar $targetDir/lib
+cp -a target/props/* $targetDir/
+cp -a microrun $targetDir/
+cp -a microstop $targetDir/
+cd target
+tar czf kernel-lppz-dubbolog.tar.gz kernel-lppz-dubbolog

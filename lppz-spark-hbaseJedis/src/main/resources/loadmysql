@@ -1,0 +1,36 @@
+#!/bin/bash
+hdfsDir=$1
+currDir=`pwd`
+targetDir=$currDir/targetDir
+
+rm -rf $targetDir
+
+hadoop fs -get $hdfsDir targetDir
+
+cd $targetDir
+
+for dir in `ls -lrt | awk '{print $9}'`
+do
+	cd $targetDir/$dir
+	dataFile=`ls -lrt | awk '{print $9}'`
+	dataFile=`echo $dataFile| sed "s/^[ \s]\{1,\}//g;s/[ \s]\{1,\}$//g"`
+	echo $dataFile
+	dataFile=$targetDir/$dir/$dataFile
+	
+	echo $dataFile
+	fileDir=$targetDir/$dir/filedir
+	mkdir -p $fileDir
+	
+	cd $fileDir
+	
+	split -l 20000 $dataFile -a 5
+	
+	for splitFile in `ls -lrt | awk '{print $9}'`
+	do
+		filePath=$fileDir/$splitFile
+		mysql -uroot -pKTqHDMg8r3q1w -h 192.168.37.246 -e "use joblppz;load data local infile '$filePath' into table busilackorder fields terminated by '\t';"
+	done
+
+done
+
+

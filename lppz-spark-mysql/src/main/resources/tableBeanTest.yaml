@@ -1,0 +1,29 @@
+!!com.lppz.spark.mysql.bean.Db2DbBean
+kafkaBrokerPath: null
+partition: 100
+sourceDriver: com.mysql.jdbc.Driver
+sourceJdbcUrl: jdbc:mysql://10.8.202.215:3311/acc_export?useConfigs=maxPerformance&characterEncoding=utf8
+sourcePwd: lppzacc
+sourceUser: root
+tables:
+  '3': {batchSize: 300, endTag: '2015-08-01', parentKey: null, partition: 500, primaryKey: _id,
+    seqTable: lp_member_seq, sourceSql: null, sourceTableOrView: lp_member_extend_view,
+    startTag: '2015-05-01', subBeans: null, targetColumns: 'id,member_no,partner_no,member_name,member_nickname,gender,educationcd,occupation,marital_status,income,id_type,id_number,header_imgpath,create_time,delete_flag,register_ip,register_terminal,terminal_type,email',
+    targetSql: null, targetTableName: lp_member_extend, totalOnce: null}
+  '2': {batchSize: 300, endTag: '2015-08-01', parentKey: null, partition: 500, primaryKey: _id,
+    seqTable: lp_member_seq, sourceSql: null, sourceTableOrView: lp_member_address_view,
+    startTag: '2015-05-01', subBeans: null, targetColumns: 'id,member_no,partner_no,consignee,gender,position,longitude,dimensionality,map_type,address,cell_phone,province_code,province_name,city_code,city_name,district_code,district_name,create_time,edit_time,is_default,post_code',
+    targetSql: null, targetTableName: lp_member_address, totalOnce: null}
+  '1': {batchSize: 300, endTag: null, parentKey: null, partition: 500, primaryKey: id,
+    seqTable: lp_member_seq, sourceSql: null, sourceTableOrView: lp_member_view, startTag: null,
+    subBeans: null, targetColumns: 'partner_no,card_no,member_no,telphone,source_type,member_account,member_pwd,password_encoding,birthday,create_time,create_user,edit_time,edit_user,register_store,recommender,member_status,sync_crm_status,sync_crm_time,member_type,member_level',
+    targetSql: null, targetTableName: lp_member, totalOnce: null}
+  '4': {batchSize: 300, endTag: '2015-08-01', parentKey: null, partition: 500, primaryKey: _id,
+    seqTable: lp_member_seq, sourceSql: null, sourceTableOrView: lp_member_capital_account_view,
+    startTag: '2015-05-01', subBeans: null, targetColumns: 'id,partner_no,member_no,card_no,level_type,all_scores,credit_scores,behavior_scores,all_card_balance,card_balance,donation_amount,card_status', targetSql: null,
+    targetTableName: lp_member_capital_account, totalOnce: null}
+targetDriver: null
+targetJdbcUrl: null
+targetPwd: null
+targetUser: null
+totalOnce: 1500000

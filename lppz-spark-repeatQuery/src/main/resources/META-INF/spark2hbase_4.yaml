@@ -1,0 +1,9 @@
+!!com.lppz.spark.scala.bean.Spark2HbaseBean
+sparkBeanMap:
+sqlBean: {colList: 'orderid,id', excludeColumnList: 'num,tenant,typecode', familyName: order,
+  isLeaf: false, isRootHbase: true, mainIdColumn: orderid, parentFamilyName: null,
+  relateKey: null, schema: omsext, sql: "select * from (select row_number() over (order
+    by id) num,* from omsextorders where ds='#month#' and isnotnull(orderid)) where num>=#start# and num<=#end#
+    and ds='#month#'", tableName: hbaseorder, total4Once: 10, uidList: 'username,basestore'}
+targetBean: {cf: order, hbasePort: '2181', hbaseQuorum: 'centos7MRBP', isWal: false,
+  partionNum: 5, tablebname: hbaseorder}

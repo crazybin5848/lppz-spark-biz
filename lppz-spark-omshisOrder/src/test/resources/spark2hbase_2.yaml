@@ -1,0 +1,129 @@
+!!com.lppz.spark.scala.bean.Spark2HbaseBean
+sparkBeanMap:
+  omsinterface:
+    sparkBeanMap: {}
+    sqlBean: {colList: bofdid, excludeColumnList: 'num,id,tenant,typecode', familyName: omsinterface,
+      isLeaf: true, isRootHbase: false, mainIdColumn: bofdid, parentFamilyName: order,
+      relateKey: orderid, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as bofdid,* from omsextbusiomsinterfacemutualdata
+        where ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+      tableName: hbaseomsinterface, total4Once: 11, uidList: null}
+    targetBean: {cf: omsinterface, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+      partionNum: 3, tablebname: hbaseomsinterface}
+  orderline:
+    sparkBeanMap:
+      orderlinequantities:
+        sparkBeanMap: {}
+        sqlBean: {colList: olqid, excludeColumnList: 'num,id,tenant,typecode', familyName: orderlinequantities,
+          isLeaf: true, isRootHbase: false, mainIdColumn: olqid, parentFamilyName: orderline,
+          relateKey: orderline, schema: omsext, sql: "select * from (select row_number()
+            over (order by id) num,id as olqid,* from omsextorderlinequantities where
+            ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+          tableName: hbaseshipment, total4Once: 11, uidList: null}
+        targetBean: {cf: orderlinequantities, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+          isWal: false, partionNum: 3, tablebname: hbaseshipment}
+      linepromotion:
+        sparkBeanMap: {}
+        sqlBean: {colList: olpid, excludeColumnList: 'num,id,tenant,typecode', familyName: linepromotion,
+          isLeaf: true, isRootHbase: false, mainIdColumn: olpid, parentFamilyName: orderline,
+          relateKey: orderline, schema: omsext, sql: "select * from (select row_number()
+            over (order by id) num,id as olpid,* from omsextbusiorderlinepromotioninfo
+            where ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+          tableName: hbaseorderlinepromotion, total4Once: 11, uidList: null}
+        targetBean: {cf: linepromotion, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+          isWal: false, partionNum: 3, tablebname: hbaseorderlinepromotion}
+      lineattribute:
+        sparkBeanMap: {}
+        sqlBean: {colList: olaid, excludeColumnList: 'num,id,tenant,typecode', familyName: lineattribute,
+          isLeaf: true, isRootHbase: false, mainIdColumn: olaid, parentFamilyName: orderline,
+          relateKey: orderline, schema: omsext, sql: "select * from (select row_number()
+            over (order by id) num,id as olaid,* from omsextorderlineattributes where
+            ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+          tableName: hbaseorderlinepromotion, total4Once: 11, uidList: null}
+        targetBean: {cf: lineattribute, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+          isWal: false, partionNum: 3, tablebname: hbaseorderlinepromotion}
+      orderlinelocaltion:
+        sparkBeanMap: {}
+        sqlBean: {colList: srcid, excludeColumnList: 'num,tenant', familyName: orderlinelocaltion,
+          isLeaf: true, isRootHbase: false, mainIdColumn: srcid, parentFamilyName: orderline,
+          relateKey: srcid, schema: omsext, sql: "select * from (select row_number()
+            over (order by srcid) num,srcid as srcid,* from omsextorderlinedatalocationroles
+            where ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+          tableName: hbaseorderlinepromotion, total4Once: 11, uidList: null}
+        targetBean: {cf: orderlinelocaltion, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+          isWal: false, partionNum: 3, tablebname: hbaseorderlinepromotion}
+    sqlBean: {colList: olid, excludeColumnList: 'num,id,tenant,typecode', familyName: orderline,
+      isLeaf: false, isRootHbase: false, mainIdColumn: olid, parentFamilyName: order,
+      relateKey: myorder, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as olid,* from omsextorderlines where ds='#month#')
+        where num>=#start# and num<=#end# and ds='#month#'", tableName: hbaseorder,
+      total4Once: 11, uidList: null}
+    targetBean: {cf: orderline, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+      partionNum: 3, tablebname: hbaseorder}
+  omsinterfacewms:
+    sparkBeanMap: {}
+    sqlBean: {colList: bofwdid, excludeColumnList: 'num,id', familyName: omsinterfacewms,
+      isLeaf: true, isRootHbase: false, mainIdColumn: bofwdid, parentFamilyName: order,
+      relateKey: orderid, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as bofwdid,* from omsedbbusiomsinterfacemutualwmsdata
+        where ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+      tableName: hbaseomsinterface, total4Once: 11, uidList: null}
+    targetBean: {cf: omsinterfacewms, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+      isWal: false, partionNum: 3, tablebname: hbaseomsinterface}
+  paymentinfo:
+    sparkBeanMap: {}
+    sqlBean: {colList: payid, excludeColumnList: 'num,id,tenant,typecode', familyName: paymentinfo,
+      isLeaf: true, isRootHbase: false, mainIdColumn: payid, parentFamilyName: order,
+      relateKey: myorder, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as payid,* from omsextpaymentinfo where ds='#month#')
+        where num>=#start# and num<=#end# and ds='#month#'", tableName: hbasepaymentinfo,
+      total4Once: 11, uidList: null}
+    targetBean: {cf: paymentinfo, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+      partionNum: 3, tablebname: hbasepaymentinfo}
+  shipment:
+    sparkBeanMap: {}
+    sqlBean: {colList: shipid, excludeColumnList: 'num,id,tenant,typecode', familyName: shipment,
+      isLeaf: true, isRootHbase: false, mainIdColumn: shipid, parentFamilyName: order,
+      relateKey: orderfk, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as shipid,* from omsextshipments where ds='#month#')
+        where num>=#start# and num<=#end# and ds='#month#'", tableName: hbaseshipment,
+      total4Once: 11, uidList: null}
+    targetBean: {cf: shipment, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+      partionNum: 3, tablebname: hbaseshipment}
+  delivery:
+    sparkBeanMap:
+      deliveryline:
+        sparkBeanMap: {}
+        sqlBean: {colList: ddlid, excludeColumnList: 'num,id,tenant,typecode', familyName: deliveryline,
+          isLeaf: true, isRootHbase: false, mainIdColumn: ddlid, parentFamilyName: delivery,
+          relateKey: mydelivery, schema: omsext, sql: "select * from (select row_number()
+            over (order by id) num,id as ddlid,* from omsextbusilpdeliveryelinedata
+            where ds='#month#') where num>=#start# and num<=#end# and ds='#month#'",
+          tableName: hbasedelivery, total4Once: 11, uidList: null}
+        targetBean: {cf: deliveryline, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245',
+          isWal: false, partionNum: 3, tablebname: hbasedelivery}
+    sqlBean: {colList: ddid, excludeColumnList: 'num,id,tenant,typecode', familyName: delivery,
+      isLeaf: false, isRootHbase: false, mainIdColumn: ddid, parentFamilyName: order,
+      relateKey: myorder, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as ddid,* from omsextbusilpdeliveryedata where ds='#month#')
+        where num>=#start# and num<=#end# and ds='#month#'", tableName: hbasedelivery,
+      total4Once: 11, uidList: null}
+    targetBean: {cf: delivery, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+      partionNum: 3, tablebname: hbasedelivery}
+  promotioninfo:
+    sparkBeanMap: {}
+    sqlBean: {colList: pid, excludeColumnList: 'num,id,tenant,typecode', familyName: promotioninfo,
+      isLeaf: true, isRootHbase: false, mainIdColumn: pid, parentFamilyName: order,
+      relateKey: myorder, schema: omsext, sql: "select * from (select row_number()
+        over (order by id) num,id as pid,* from omsextbusipromotioninfo where ds='#month#')
+        where num>=#start# and num<=#end# and ds='#month#'", tableName: hbasepaymentinfo,
+      total4Once: 11, uidList: null}
+    targetBean: {cf: promotioninfo, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+      partionNum: 3, tablebname: hbasepaymentinfo}
+sqlBean: {colList: 'orderid,id', excludeColumnList: 'num,tenant,typecode', familyName: order,
+  isLeaf: false, isRootHbase: true, mainIdColumn: orderid, parentFamilyName: null,
+  relateKey: null, schema: omsext, sql: "select * from (select row_number() over (order
+    by id) num,* from omsextorders where ds='#month#') where num>=#start# and num<=#end#
+    and ds='#month#'", tableName: hbaseorder, total4Once: 11, uidList: 'username,basestore'}
+targetBean: {cf: order, hbasePort: '2181', hbaseQuorum: '192.168.37.242,192.168.37.243,192.168.37.245', isWal: false,
+  partionNum: 3, tablebname: hbaseorder}

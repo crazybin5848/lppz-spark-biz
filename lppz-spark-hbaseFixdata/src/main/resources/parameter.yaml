@@ -1,0 +1,7 @@
+!!com.lppz.spark.bean.Parameter {
+day: '2017-10-13',
+mode: 'local[8]',
+dsPath: '/Users/chenlisong/Documents/binlppzsap/lppz/lppz-spark-biz/lppz-spark-hbaseFixdata/src/main/resources/hive.yaml',
+hbasePath: '/Users/chenlisong/Documents/binlppzsap/lppz/lppz-spark-biz/lppz-spark-hbaseFixdata/src/main/resources/hbase-lppz-client.yaml',
+rowkeyPath: '/opt/rowkeys.txt'
+}

@@ -1,0 +1,12 @@
+!!com.lppz.dubbo.omsinit.test.ExportBean {
+appName: export oms tmall member by ds, 
+countSql: null,
+dataSql: 'select shad_mobilephone,orderid,paymentdate from omsextorders a  where
+    a.ds=''ds-'' and a.basestore=''single|BaseStoreData|1007'' and paymentdate=(select
+    max(paymentdate) from omsextorders b where a.shad_mobilephone=b.shad_mobilephone
+    and b.ds=''ds-'' and b.basestore=''single|BaseStoreData|1007'')', 
+hdfsUrl: 'hdfs://hamaster:9000',
+partition: 200, 
+schema: omsext, 
+totalOnce: 0
+}
